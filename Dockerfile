@@ -1,4 +1,4 @@
-FROM node:11.1.0
+FROM mhart/alpine-node:11.1.0
 
 RUN mkdir /authentication-app
 
