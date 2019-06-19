@@ -5,6 +5,7 @@ RUN mkdir /authentication-app
 WORKDIR /authentication-app
 
 ENV PATH /authentication-app/node_modules/.bin:$PATH
+ENV NODE_ENV=development
 
 COPY package.json /authentication-app/package.json
 
