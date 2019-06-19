@@ -1,5 +1,5 @@
 {
-  "host": "localhost",
+  "host": "https://authentication-7oi9.onrender.com",
   "port": 80,
   "public": "../public/",
   "paginate": {
