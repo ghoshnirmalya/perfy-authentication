@@ -2,7 +2,7 @@
   "name": "authentication",
   "description": "",
   "version": "0.0.0",
-  "homepage": "",
+  "license": "MIT",
   "main": "src",
   "keywords": [
     "feathers"
@@ -48,7 +48,7 @@
     "winston": "^3.2.1"
   },
   "devDependencies": {
-    "eslint": "^6.1.0",
+    "eslint": "^5.16.0",
     "jest": "^24.8.0",
     "nodemon": "^1.19.1",
     "request": "^2.88.0",
