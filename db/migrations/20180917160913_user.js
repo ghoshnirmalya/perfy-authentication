@@ -4,23 +4,23 @@ exports.up = function(knex, Promise) {
       .uuid('id')
       .primary()
       .unique()
-      .defaultTo(knex.raw('gen_random_uuid()'))
+      .defaultTo(knex.raw('gen_random_uuid()'));
     table
-      .string('username')
+      .string('email')
       .unique()
-      .notNullable()
-    table.string('password').notNullable()
+      .notNullable();
+    table.string('password').notNullable();
     table
       .timestamp('created_at')
       .notNullable()
-      .defaultTo(knex.raw('now()'))
+      .defaultTo(knex.raw('now()'));
     table
       .boolean('active')
       .defaultTo(true)
-      .index()
-  })
-}
+      .index();
+  });
+};
 
 exports.down = function(knex, Promise) {
-  return knex.schema.dropTable('user')
-}
+  return knex.schema.dropTable('user');
+};

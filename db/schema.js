@@ -11,25 +11,25 @@ const knexConnection = Knex(connection)
 Model.knex(knexConnection)
 
 class Role extends Model {
-  static get tableName() {
+  static get tableName () {
     return 'role'
   }
 
-  static get idColumn() {
+  static get idColumn () {
     return 'id'
   }
 }
 
 class User extends Model {
-  static get tableName() {
+  static get tableName () {
     return 'user'
   }
 
-  static get idColumn() {
+  static get idColumn () {
     return 'id'
   }
 
-  static get relationMappings() {
+  static get relationMappings () {
     return {
       roles: {
         relation: Model.ManyToManyRelation,
@@ -46,20 +46,20 @@ class User extends Model {
     }
   }
 
-  getRoles() {
+  getRoles () {
     return this.roles.map(el => el.name).concat('user')
   }
 
-  getUser() {
+  getUser () {
     return {
       id: this.id,
-      username: this.username,
+      email: this.email,
       roles: this.getRoles(),
       token: this.getJwt()
     }
   }
 
-  getHasuraClaims() {
+  getHasuraClaims () {
     return {
       'x-hasura-allowed-roles': this.getRoles(),
       'x-hasura-default-role': 'user',
@@ -69,40 +69,40 @@ class User extends Model {
     }
   }
 
-  getJwt() {
+  getJwt () {
     const signOptions = {
       subject: this.id,
       expiresIn: '30d', // 30 days validity
       algorithm: 'RS256'
     }
     const claim = {
-      name: this.username,
+      name: this.email,
       // iat: Math.floor(Date.now() / 1000),
       'https://hasura.io/jwt/claims': this.getHasuraClaims()
     }
     return jwt.sign(claim, jwtConfig.key, signOptions)
   }
 
-  async $beforeInsert() {
+  async $beforeInsert () {
     const salt = bcrypt.genSaltSync()
     this.password = await bcrypt.hash(this.password, salt)
   }
 
-  async $beforeUpdate() {
+  async $beforeUpdate () {
     await $beforeInsert()
   }
 
-  verifyPassword(password, callback) {
+  verifyPassword (password, callback) {
     bcrypt.compare(password, this.password, callback)
   }
 
-  static get jsonSchema() {
+  static get jsonSchema () {
     return {
       type: 'object',
-      required: ['username'],
+      required: ['email'],
       properties: {
         id: { type: 'integer' },
-        username: { type: 'string', minLength: 1, maxLength: 255 }
+        email: { type: 'string', minLength: 1, maxLength: 255 }
       }
     }
   }
