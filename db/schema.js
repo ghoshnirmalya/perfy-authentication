@@ -64,7 +64,7 @@ class User extends Model {
       'x-hasura-allowed-roles': this.getRoles(),
       'x-hasura-default-role': 'user',
       'x-hasura-user-id': `${this.id}`
-      // 'x-hasura-org-id': '123',
+      // 'x-hasura-org-id': '123',{}
       // 'x-hasura-custom': 'custom-value'
     }
   }
