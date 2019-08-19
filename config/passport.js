@@ -8,21 +8,21 @@ passport.use(
   new LocalStrategy(
     {
       usernameField: 'email',
-      passwordField: 'password'
+      passwordField: 'password',
     },
-    function (email, password, done) {
+    function(email, password, done) {
       User.query()
         .where('email', email)
         .first()
         .eager('roles')
-        .then(function (user) {
+        .then(function(user) {
           if (!user) {
             return done('Unknown user')
           }
           if (!user.active) {
             return done('User is inactive')
           }
-          user.verifyPassword(password, function (err, passwordCorrect) {
+          user.verifyPassword(password, function(err, passwordCorrect) {
             if (err) {
               return done(err)
             }
@@ -32,7 +32,7 @@ passport.use(
             return done(null, user)
           })
         })
-        .catch(function (err) {
+        .catch(function(err) {
           done(err)
         })
     }
@@ -40,12 +40,12 @@ passport.use(
 )
 
 passport.use(
-  new BearerStrategy(function (token, done) {
+  new BearerStrategy(function(token, done) {
     User.query()
       .where('token', token)
       .first()
       .eager('roles')
-      .then(function (user) {
+      .then(function(user) {
         if (!user) {
           return done('Invalid Token')
         }
@@ -54,7 +54,7 @@ passport.use(
         }
         return done(null, user)
       })
-      .catch(function (err) {
+      .catch(function(err) {
         done(err)
       })
   })

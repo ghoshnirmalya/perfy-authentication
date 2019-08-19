@@ -1,0 +1,6 @@
+{
+  "ignore": [".git", "node_modules/**/node_modules"],
+  "verbose": true,
+  "watch": ["config", "controllers", "db", "static", "types"],
+  "exec": "node app.js"
+}

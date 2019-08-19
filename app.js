@@ -4,8 +4,7 @@
 
 const express = require('express')
 const bodyParser = require('body-parser')
-const chalk = require('chalk')
-// const dotenv = require('dotenv');
+const dotenv = require('dotenv')
 const passport = require('passport')
 const cors = require('cors')
 const expressValidator = require('express-validator')
@@ -13,7 +12,7 @@ const expressValidator = require('express-validator')
 /**
  * Load environment variables from .env file, where API keys and passwords are configured.
  */
-// dotenv.load({ path: '.env.example' });
+require('dotenv').config()
 
 /**
  * Controllers (route handlers).
@@ -43,8 +42,7 @@ app.get('/jwks', userController.getJwks)
  */
 app.listen(app.get('port'), () => {
   console.log(
-    '%s App is running at http://localhost:%d in %s mode',
-    chalk.green('✓'),
+    ' ⚡️ Ready on http://localhost:%d in %s mode',
     app.get('port'),
     app.get('env')
   )
