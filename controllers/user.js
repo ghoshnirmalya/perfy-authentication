@@ -54,9 +54,6 @@ exports.postLogin = async (req, res, next) => {
 exports.postSignup = async (req, res, next) => {
   req.assert('email', 'email is not valid').notEmpty()
   req.assert('password', 'Password must be at least 4 characters long').len(4)
-  req
-    .assert('confirmPassword', 'Passwords do not match')
-    .equals(req.body.password)
 
   const errors = req.validationErrors()
 
