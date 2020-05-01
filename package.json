@@ -25,7 +25,7 @@
     "passport-local": "^1.0.0",
     "pg": "^8.0.3",
     "rasha": "^1.2.1",
-    "util": "^0.12.2"
+    "util": "^0.12.3"
   },
   "devDependencies": {
     "husky": "^4.2.5",
